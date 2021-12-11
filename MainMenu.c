@@ -22,16 +22,16 @@ void printMainMenu() {
 }
 
 int pickFromMainMenu() {
-    int input;
+    int mainMenuInput;
 
-    printf("Select an option from the menu: ");
-    scanf("%d", &input);
+    printf("Select an option from the menu: \n");
+    scanf("%d", &mainMenuInput);
 
-    if (input < 0 || input > 3) {
+    if (mainMenuInput < 0 || mainMenuInput > 3) {
         printf("\nInvalid option. \n");
 
-        input = pickFromMainMenu();
+        mainMenuInput = pickFromMainMenu();
     }
 
-    return input;
+    return mainMenuInput;
 }
