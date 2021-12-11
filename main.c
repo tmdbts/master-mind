@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include "MainMenu.h"
+#include "Settings.h"
 
 int main() {
     int menuChoice;
-    printf("*** WELCOME TO THE MASTER MIND *** \n");
 
+    printf("*** WELCOME TO THE MASTER MIND *** \n");
 
     do {
         printMainMenu();
-        
+
         menuChoice = pickFromMainMenu();
 
         switch (menuChoice) {
@@ -25,8 +26,7 @@ int main() {
                 break;
 
             case 3:
-//            Settings();
-                printf("3");
+                Settings();
 
                 break;
 
