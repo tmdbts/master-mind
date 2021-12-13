@@ -4,8 +4,10 @@
 
 #include "Settings.h"
 #include <stdio.h>
+#include "helpers.h"
 
 void printSettingsMenu() {
+    clear();
     printf("\n");
     printf("+---+--------------------------+ \n");
     printf("|           Settings           | \n");
