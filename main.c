@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "MainMenu.h"
 #include "Settings.h"
+#include "SinglePlayer.h"
+#include "helpers.h"
 
 int main() {
     int menuChoice;
@@ -14,18 +16,22 @@ int main() {
 
         switch (menuChoice) {
             case 1:
-//            PlaySinglePlayer();
-                printf("1");
+                clear();
+                PlaySinglePlayer();
 
                 break;
 
             case 2:
 //            PlayMultiPlayer();
-                printf("2");
 
                 break;
 
             case 3:
+//                Statistics();
+
+                break;
+
+            case 4:
                 Settings();
 
                 break;
