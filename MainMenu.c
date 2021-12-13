@@ -14,7 +14,9 @@ void printMainMenu() {
     printf("+---+---------------+ \n");
     printf("| 2 |   Multiplayer | \n");
     printf("+---+---------------+ \n");
-    printf("| 3 |      Settings | \n");
+    printf("| 3 |    Statistics | \n");
+    printf("+---+---------------+ \n");
+    printf("| 4 |      Settings | \n");
     printf("+---+---------------+ \n");
     printf("| 0 |          Exit | \n");
     printf("+---+---------------+ \n");
@@ -27,7 +29,7 @@ int pickFromMainMenu() {
     printf("Select an option from the menu: \n");
     scanf("%d", &mainMenuInput);
 
-    if (mainMenuInput < 0 || mainMenuInput > 3) {
+    if (mainMenuInput < 0 || mainMenuInput > 4) {
         printf("\nInvalid option. \n");
 
         mainMenuInput = pickFromMainMenu();
