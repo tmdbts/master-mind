@@ -48,10 +48,6 @@ int isPlayerNameValid(char inputName) {
     return 1;
 }
 
-char toUppercase(char value) {
-    return value <= 65 || value >= 90 ? value - 32 : value;
-}
-
 char readPlayerName(int playerNumber) {
     char nameInput;
 

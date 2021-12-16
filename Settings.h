@@ -46,14 +46,6 @@ int pickFromSettingsMenu();
 int isPlayerNameValid(char inputName);
 
 /**
- * Converts the name inserted by the user to an uppercase name
- *
- * @param value the name inserted by the user
- * @return the name in uppercase
- */
-char toUppercase(char value);
-
-/**
  * Reads the name from the user
  *
  * @param playerNumber player number
