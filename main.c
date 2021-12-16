@@ -7,6 +7,8 @@
 int main() {
     int menuChoice;
 
+    clear();
+
     printf("*** WELCOME TO THE MASTER MIND *** \n");
 
     do {
