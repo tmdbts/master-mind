@@ -7,4 +7,6 @@
 
 static const char COLORS[] = {'R', 'G', 'B', 'W', 'Y', 'O'};
 
+static const int COLORS_LENGTH = sizeof COLORS / sizeof(char);
+
 #endif //PROJECT_CONSTANTS_H
