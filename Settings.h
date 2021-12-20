@@ -6,14 +6,9 @@
 #define PROJECT_SETTINGS_H
 
 /**
- * Stores the name for the player one
+ * Stores the names for the two players
  */
-static char playerName1 = 'O';
-
-/**
- * Stores the name for the player two
- */
-static char playerName2 = 'T';
+static char playerName[2] = {'O', 'T'};
 
 /**
  * Stores the max number of tries

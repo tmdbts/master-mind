@@ -14,7 +14,7 @@ void printSettingsMenu() {
     printf("+---+--------------------------+ \n");
     printf("| 1 | Change player one's name | \n");
     printf("+---+--------------------------+ \n");
-    printf("| 2 | Change player one's name | \n");
+    printf("| 2 | Change player two's name | \n");
     printf("+---+--------------------------+ \n");
     printf("| 3 |                Max tries | \n");
     printf("+---+--------------------------+ \n");
@@ -94,14 +94,14 @@ void Settings() {
 
         switch (settingMenuInput) {
             case 1:
-                playerName1 = readPlayerName(1);
-                printf("The name of the player one is now %c.", playerName1);
+                playerName[0] = readPlayerName(1);
+                printf("The name of the player one is now %c.", playerName[0]);
 
                 break;
 
             case 2:
-                playerName2 = readPlayerName(2);
-                printf("The name of the player two is now %c.", playerName2);
+                playerName[1] = readPlayerName(2);
+                printf("The name of the player two is now %c.", playerName[1]);
 
                 break;
 

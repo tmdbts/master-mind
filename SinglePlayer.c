@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Statistics.h"
+#include "Settings.h"
 
 int selectPlayer() {
     int input;
@@ -88,6 +89,8 @@ void PlaySinglePlayer() {
 
     int player = selectPlayer() - 1;
 
+    printf("Playing as %c \n", playerName[player]);
+
     generateKeycode();
 
     printKeycode();
@@ -104,6 +107,6 @@ void PlaySinglePlayer() {
             setTotalPoints(player, totalPoints[player] += 5);
         }
     }
-    
+
     printStatistics();
 }

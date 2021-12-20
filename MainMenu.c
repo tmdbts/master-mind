@@ -10,9 +10,9 @@ void printMainMenu() {
     printf("+---+---------------+ \n");
     printf("|     Main Menu     | \n");
     printf("+---+---------------+ \n");
-    printf("| 1 | Single player | \n");
+    printf("| 1 | 🧍‍♂️ Single player | \n");
     printf("+---+---------------+ \n");
-    printf("| 2 |   Multiplayer | \n");
+    printf("| 2 | 👫 Multiplayer | \n");
     printf("+---+---------------+ \n");
     printf("| 3 |    Statistics | \n");
     printf("+---+---------------+ \n");
