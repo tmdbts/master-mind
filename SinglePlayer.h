@@ -5,26 +5,28 @@
 #ifndef PROJECT_SINGLE_PLAYER_H
 #define PROJECT_SINGLE_PLAYER_H
 
-char keycode[4];
+static char keycode[4];
 
-char guess[4];
+static char guess[4];
 
-int keycodeLen;
+static int keycodeLen;
 
-int selectPlayer();
+static int selectPlayer();
 
-void generateKeycode();
+static void generateKeycode();
 
-void printKeycode();
+static void printKeycode();
 
-int guessValidator(int toValidateGuess);
+static int guessValidator(int toValidateGuess);
 
-void readUserInput();
+static void readUserInput();
+
+static int isGuessCorrect(int i);
+
+static int areGuessColorsCorrect(int i);
+
+static void evaluateGuess(int player);
 
 void PlaySinglePlayer();
-
-int isGuessCorrect(int i);
-
-int isGuessPartiallyCorrect(int i);
 
 #endif //PROJECT_SINGLE_PLAYER_H

@@ -11,7 +11,7 @@
 #include "Statistics.h"
 #include "Settings.h"
 
-int selectPlayer() {
+static int selectPlayer() {
     int input;
 
     printf("Which player is playing? (1 or 2)\n");
@@ -26,7 +26,7 @@ int selectPlayer() {
     return input;
 }
 
-void generateKeycode() {
+static void generateKeycode() {
     int intKeyCode[keycodeLen];
 
     srand(time(NULL));
@@ -37,7 +37,7 @@ void generateKeycode() {
     }
 }
 
-void printKeycode() {
+static void printKeycode() {
     printf("keycode: ");
 
     for (int i = 0; i < keycodeLen; ++i) {
@@ -47,7 +47,7 @@ void printKeycode() {
     printf("\n\n");
 }
 
-int guessValidator(int toValidateGuess) {
+static int guessValidator(int toValidateGuess) {
     for (int i = 0; i < COLORS_LENGTH; ++i) {
         if (toValidateGuess == COLORS[i]) return 1;
     }
@@ -55,7 +55,7 @@ int guessValidator(int toValidateGuess) {
     return 0;
 }
 
-void readUserInput() {
+static void readUserInput() {
     for (int i = 0; i < keycodeLen; ++i) {
         printf("Insert your guess for the position %i: \n", i);
         scanf(" %c", &guess[i]);
@@ -70,18 +70,50 @@ void readUserInput() {
     }
 }
 
-int isGuessCorrect(int i) {
+static int isGuessCorrect(int i) {
     if (guess[i] == keycode[i]) return 1;
 
     return 0;
 }
 
-int isGuessPartiallyCorrect(int i) {
+static int areGuessColorsCorrect(int i) {
     for (int j = 0; j < keycodeLen; ++j) {
         if (guess[i] == keycode[j]) return 1;
     }
 
     return 0;
+}
+
+static void evaluateGuess(int player) {
+    int correctGuesses = 0;
+    int correctGuessColors = 0;
+
+    for (int i = 0; i < keycodeLen; ++i) {
+        if (isGuessCorrect(i) == 1) {
+            correctGuesses++;
+
+            continue;
+        }
+
+        if (areGuessColorsCorrect(i) == 1) {
+            correctGuessColors++;
+        }
+    }
+
+    if (correctGuesses == keycodeLen) {
+        setTotalPoints(player, totalPoints[player] += 10);
+
+        return;
+    }
+
+    if (correctGuesses >= keycodeLen / 2) {
+        setTotalPoints(player, totalPoints[player] += 5);
+
+        return;
+    }
+
+    if (correctGuessColors >= keycodeLen / 2)
+        setTotalPoints(player, totalPoints[player] += 2);
 }
 
 void PlaySinglePlayer() {
@@ -92,21 +124,8 @@ void PlaySinglePlayer() {
     printf("Playing as %c \n", playerName[player]);
 
     generateKeycode();
-
     printKeycode();
     readUserInput();
-
-    for (int i = 0; i < keycodeLen; ++i) {
-        if (isGuessCorrect(i) == 1) {
-            setTotalPoints(player, totalPoints[player] += 10);
-
-            continue;
-        }
-
-        if (isGuessPartiallyCorrect(i) == 1) {
-            setTotalPoints(player, totalPoints[player] += 5);
-        }
-    }
-
+    evaluateGuess(player);
     printStatistics();
 }
