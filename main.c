@@ -3,6 +3,7 @@
 #include "Settings.h"
 #include "SinglePlayer.h"
 #include "helpers.h"
+#include "Multiplayer.h"
 
 int main() {
     int menuChoice;
@@ -24,7 +25,8 @@ int main() {
                 break;
 
             case 2:
-//            PlayMultiPlayer();
+                clear();
+                PlayMultiplayer();
 
                 break;
 
