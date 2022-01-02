@@ -4,6 +4,7 @@
 #include "SinglePlayer.h"
 #include "helpers.h"
 #include "Multiplayer.h"
+#include "Statistics.h"
 
 int main() {
     int menuChoice;
@@ -19,19 +20,29 @@ int main() {
 
         switch (menuChoice) {
             case 1:
-                clear();
+                if (getTotalPlayedGames() >= maxSessionGames) {
+                    printf("You can't play more games. You reached your limit");
+
+                    break;
+                }
+
                 PlaySinglePlayer();
 
                 break;
 
             case 2:
-                clear();
+                if (getTotalPlayedGames() >= maxSessionGames) {
+                    printf("You can't play more games. You reached your limit. \n\n");
+
+                    break;
+                }
+
                 PlayMultiplayer();
 
                 break;
 
             case 3:
-//                Statistics();
+                Statistics();
 
                 break;
 
@@ -44,7 +55,6 @@ int main() {
                 break;
         }
     } while (menuChoice != 0);
-
 
     return 0;
 }
