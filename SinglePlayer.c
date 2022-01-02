@@ -57,13 +57,13 @@ static int guessValidator(int toValidateGuess) {
 
 static void readUserInput() {
     for (int i = 0; i < keycodeLen; ++i) {
-        printf("Insert your guess for the position %i: \n", i);
+        printf("%sInsert your guess for the position %i: \n", TERMINAL_COLOR_DEFAULT, i);
         scanf(" %c", &guess[i]);
 
         guess[i] = toUppercase(guess[i]);
 
         if (guessValidator(guess[i]) == 0) {
-            printf("Invalid color. Insert a new color. \n\n");
+            printf("%sInvalid color. Insert a new color. \n\n", TERMINAL_COLOR_RED);
 
             i--;
         }
@@ -84,7 +84,7 @@ static int areGuessColorsCorrect(int i) {
     return 0;
 }
 
-static void evaluateGuess(int player) {
+static int evaluateGuess(int player) {
     int correctGuesses = 0;
     int correctGuessColors = 0;
 
@@ -100,32 +100,66 @@ static void evaluateGuess(int player) {
         }
     }
 
+    evaluateScore(player, correctGuesses, correctGuessColors);
+
     if (correctGuesses == keycodeLen) {
         setTotalPoints(player, totalPoints[player] += 10);
+        setWonGames(player, ++wonGames[player]);
 
-        return;
+        return 1;
     }
 
     if (correctGuesses >= keycodeLen / 2) {
         setTotalPoints(player, totalPoints[player] += 5);
 
-        return;
+        return 0;
     }
 
-    if (correctGuessColors >= keycodeLen / 2)
+    if (correctGuessColors >= keycodeLen / 2) {
         setTotalPoints(player, totalPoints[player] += 2);
+    }
+
+    return 0;
 }
 
 void PlaySinglePlayer() {
     keycodeLen = sizeof keycode / sizeof(char);
+    int hasWon = 0;
+    tries = 0;
+
+    clear();
 
     int player = selectPlayer() - 1;
 
-    printf("Playing as %c \n", playerName[player]);
+
+    setPlayedGames(player, ++playedGames[player]);
+    updateStatistics();
+    clear();
+
+    printf("Playing as %c \n\n", playerName[player]);
 
     generateKeycode();
-    printKeycode();
-    readUserInput();
-    evaluateGuess(player);
-    printStatistics();
+//    printKeycode();
+
+    while (tries < maxTries && hasWon == 0) {
+        tries++;
+
+        readUserInput();
+        hasWon = evaluateGuess(player);
+
+        clear();
+
+        if (tries < maxTries && hasWon == 0) {
+            int triesLeft = maxTries - tries;
+
+            printf("%sThe combination is incorrect. Try again. \n", TERMINAL_COLOR_YELLOW);
+            printf("%sYou have %i tries left. \n\n", TERMINAL_COLOR_YELLOW, triesLeft);
+        }
+    }
+
+    if (tries == 5 && hasWon == 0) {
+        printf("You have run out of tries. \n");
+    }
+
+    setTotalTries(player, totalTries[player] + tries);
 }

@@ -11,6 +11,8 @@ static char guess[4];
 
 static int keycodeLen;
 
+static int tries;
+
 static int selectPlayer();
 
 static void generateKeycode();
@@ -25,7 +27,7 @@ static int isGuessCorrect(int i);
 
 static int areGuessColorsCorrect(int i);
 
-static void evaluateGuess(int player);
+static int evaluateGuess(int player);
 
 void PlaySinglePlayer();
 
