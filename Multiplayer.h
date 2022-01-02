@@ -21,6 +21,11 @@ static char guess[4];
 static int keycodeLen;
 
 /**
+ * Stores the value for the number of tries.
+ */
+static int tries;
+
+/**
  * Selects the player that begins guessing
  *
  * @return The player that begins guessing
@@ -65,6 +70,8 @@ static int isGuessCorrect(int i);
  * @return 0 for a partial incorrect guess and 1 for a partial correct guess
  */
 static int areGuessColorsCorrect(int i);
+
+static int evaluateGuess(int player);
 
 /**
  * Entry point for the multiplayer

@@ -94,7 +94,7 @@ static int areGuessColorsCorrect(int i) {
     return 0;
 }
 
-static void evaluateGuess(int player) {
+static int evaluateGuess(int player) {
     int correctGuesses = 0;
     int correctGuessColors = 0;
 
@@ -112,22 +112,30 @@ static void evaluateGuess(int player) {
 
     if (correctGuesses == keycodeLen) {
         setTotalPoints(player, totalPoints[player] += 10);
+        setWonGames(player, ++wonGames[player]);
 
-        return;
+        return 1;
     }
 
     if (correctGuesses >= keycodeLen / 2) {
         setTotalPoints(player, totalPoints[player] += 5);
 
-        return;
+        return 0;
     }
 
     if (correctGuessColors >= keycodeLen / 2)
         setTotalPoints(player, totalPoints[player] += 2);
+
+    return 0;
 }
 
 void PlayMultiplayer() {
     keycodeLen = sizeof keycode / sizeof(char);
+    int hasWon = 0;
+    tries = 0;
+
+    clear();
+
 
     int decoderPlayer = selectPlayer() - 1;
     int encoderPlayer;
@@ -138,11 +146,23 @@ void PlayMultiplayer() {
         encoderPlayer = decoderPlayer - 1;
     }
 
+    setPlayedGames(decoderPlayer, playedGames[decoderPlayer] += 1);
+    updateStatistics();
+    clear();
+
     createKeycode(encoderPlayer);
     clear();
     printKeycode();
-    readUserInput();
-    clear();
-    evaluateGuess(decoderPlayer);
-    printStatistics();
+
+    while (tries < maxTries && hasWon == 0) {
+        tries++;
+
+        readUserInput();
+        clear();
+        hasWon = evaluateGuess(decoderPlayer);
+    }
+
+    setTotalTries(decoderPlayer, totalTries[decoderPlayer] + tries);
+
+    if (hasWon == 0) setWonGames(encoderPlayer, ++wonGames[encoderPlayer]);
 }
