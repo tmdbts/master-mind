@@ -41,7 +41,7 @@ static void printKeycode() {
     printf("keycode: ");
 
     for (int i = 0; i < keycodeLen; ++i) {
-        printf("%c ", keycode[i]);
+        printf(" %c ", keycode[i]);
     }
 
     printf("\n\n");
@@ -63,7 +63,8 @@ static void readUserInput() {
         guess[i] = toUppercase(guess[i]);
 
         if (guessValidator(guess[i]) == 0) {
-            printf("%sInvalid color. Insert a new color. \n\n", TERMINAL_COLOR_RED);
+            printf("\n%sInvalid color. Insert a valid color. \n", TERMINAL_COLOR_RED);
+            printf("%sList of valid colors: [R, G, B, W, Y, O]. \n\n", TERMINAL_COLOR_RED);
 
             i--;
         }
@@ -131,12 +132,11 @@ void PlaySinglePlayer() {
 
     int player = selectPlayer() - 1;
 
-
     setPlayedGames(player, ++playedGames[player]);
     updateStatistics();
     clear();
 
-    printf("Playing as %c \n\n", playerName[player]);
+    printf("%sPlaying as %c \n\n", TERMINAL_COLOR_GREEN, playerName[player]);
 
     generateKeycode();
 //    printKeycode();
