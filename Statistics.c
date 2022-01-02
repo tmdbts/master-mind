@@ -5,6 +5,7 @@
 #include "Statistics.h"
 #include <stdio.h>
 #include "Settings.h"
+#include "helpers.h"
 
 int totalPoints[2] = {0, 0};
 
@@ -176,12 +177,15 @@ void Statistics() {
     int player;
 
     updateStatistics();
+    clear();
 
     do {
         printStaticsMenu();
         menuChoice = pickFromStatisticsMenu();
-
+        
         player = menuChoice - 1;
+
+        clear();
 
         if (player == 0 || player == 1) showStats(player);
     } while (menuChoice != 0);
