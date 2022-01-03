@@ -17,4 +17,9 @@ void printMainMenu();
  */
 int pickFromMainMenu();
 
+/**
+ * Entry point for the MainMenu
+ */
+void MainMenu();
+
 #endif //PROJECT_MAIN_MENU_H
