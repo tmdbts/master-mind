@@ -67,13 +67,14 @@ static void printKeycode() {
 
 static void readUserInput() {
     for (int i = 0; i < keycodeLen; ++i) {
-        printf("Insert your guess for the position %i: \n", i);
+        printf("%sInsert your guess for the position %i: \n", TERMINAL_COLOR_DEFAULT, i);
         scanf(" %c", &guess[i]);
 
         guess[i] = toUppercase(guess[i]);
 
         if (colorValidator(guess[i]) == 0) {
-            printf("Invalid color. Insert a new color. \n\n");
+            printf("\n%sInvalid color. Insert a valid color. \n", TERMINAL_COLOR_RED);
+            printf("%sList of valid colors: [R, G, B, W, Y, O]. \n\n", TERMINAL_COLOR_RED);
 
             i--;
         }
