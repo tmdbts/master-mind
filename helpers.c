@@ -20,18 +20,6 @@ int randomizerMax(int max) {
     return rand() % max;
 }
 
-int randomizer(int min, int max) {
-    return rand() % max + min;
-}
-
-int getIntArrayLength(int array) {
-    return sizeof array / sizeof(int);
-}
-
-int getCharArrayLength(char array) {
-    return sizeof array / sizeof(char);
-}
-
 char toUppercase(char value) {
     return value <= 65 || value >= 90 ? value - 32 : value;
 }
