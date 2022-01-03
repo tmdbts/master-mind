@@ -4,7 +4,6 @@
 
 #include "helpers.h"
 #include <stdlib.h>
-#include <time.h>
 
 void clear() {
 #ifdef _WIN32
