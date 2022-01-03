@@ -35,16 +35,17 @@ static int colorValidator(int toValidateGuess) {
 static void createKeycode(int player) {
     char input;
 
-    printf("Player %c it is your time to create a keycode.\n\n", playerName[player]);
+    printf("%sPlayer %c it is your time to create a keycode.\n\n", TERMINAL_COLOR_GREEN, playerName[player]);
 
     for (int i = 0; i < keycodeLen; ++i) {
-        printf("Insert the position %i of the keycode:\n", i);
+        printf("%sInsert the position %i of the keycode:\n", TERMINAL_COLOR_DEFAULT, i);
         scanf(" %c", &input);
 
         input = toUppercase(input);
 
         if (colorValidator(input) == 0) {
-            printf("Invalid color. Please insert a valid color.\n\n");
+            printf("\n%sInvalid color. Insert a valid color. \n", TERMINAL_COLOR_GREEN);
+            printf("%sList of valid colors: [R, G, B, W, Y, O]. \n\n", TERMINAL_COLOR_RED);
 
             i--;
 
@@ -65,7 +66,9 @@ static void printKeycode() {
     printf("\n\n");
 }
 
-static void readUserInput() {
+static void readUserInput(int player) {
+    printf("%sPlayer %c it is your time to guess.\n\n", TERMINAL_COLOR_GREEN, playerName[player]);
+
     for (int i = 0; i < keycodeLen; ++i) {
         printf("%sInsert your guess for the position %i: \n", TERMINAL_COLOR_DEFAULT, i);
         scanf(" %c", &guess[i]);
@@ -111,6 +114,8 @@ static int evaluateGuess(int player) {
         }
     }
 
+    evaluateScore(player, correctGuesses, correctGuessColors);
+
     if (correctGuesses == keycodeLen) {
         setTotalPoints(player, totalPoints[player] += 10);
         setWonGames(player, ++wonGames[player]);
@@ -147,23 +152,32 @@ void PlayMultiplayer() {
         encoderPlayer = decoderPlayer - 1;
     }
 
-    setPlayedGames(decoderPlayer, playedGames[decoderPlayer] += 1);
+    setPlayedGames(decoderPlayer, ++playedGames[decoderPlayer]);
     updateStatistics();
     clear();
 
     createKeycode(encoderPlayer);
     clear();
-    printKeycode();
+//    printKeycode();
 
     while (tries < maxTries && hasWon == 0) {
         tries++;
 
-        readUserInput();
+        readUserInput(decoderPlayer);
         clear();
         hasWon = evaluateGuess(decoderPlayer);
+
+        if (tries < maxTries && hasWon == 0) {
+            int triesLeft = maxTries - tries;
+
+            printf("%sThe combination is incorrect. Try again. \n", TERMINAL_COLOR_YELLOW);
+            printf("%sYou have %i tries left. \n\n", TERMINAL_COLOR_YELLOW, triesLeft);
+        }
+    }
+
+    if (tries == maxTries && hasWon == 0) {
+        printf("%sYou have run out of tries. \n", TERMINAL_COLOR_YELLOW);
     }
 
     setTotalTries(decoderPlayer, totalTries[decoderPlayer] + tries);
-
-    if (hasWon == 0) setWonGames(encoderPlayer, ++wonGames[encoderPlayer]);
 }

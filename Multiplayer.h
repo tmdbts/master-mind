@@ -30,7 +30,7 @@ static int tries;
  *
  * @return The player that begins guessing
  */
-static int selectStartingPlayer();
+static int selectPlayer();
 
 /**
  * Creates the keycode from user input
@@ -53,7 +53,7 @@ static int colorValidator(int toValidateGuess);
 /**
  * Reads the guess from user input
  */
-static void readUserInput();
+static void readUserInput(int player);
 
 /**
  * Checks if the colors are correct in the right place
