@@ -139,7 +139,7 @@ void PlaySinglePlayer() {
     printf("%sPlaying as %c \n\n", TERMINAL_COLOR_GREEN, playerName[player]);
 
     generateKeycode();
-//    printKeycode();
+    printKeycode();
 
     while (tries < maxTries && hasWon == 0) {
         tries++;
@@ -157,8 +157,8 @@ void PlaySinglePlayer() {
         }
     }
 
-    if (tries == 5 && hasWon == 0) {
-        printf("You have run out of tries. \n");
+    if (tries == maxTries && hasWon == 0) {
+        printf("%sYou have run out of tries. \n", TERMINAL_COLOR_YELLOW);
     }
 
     setTotalTries(player, totalTries[player] + tries);
