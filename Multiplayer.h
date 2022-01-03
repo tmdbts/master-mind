@@ -71,10 +71,16 @@ static int isGuessCorrect(int i);
  */
 static int areGuessColorsCorrect(int i);
 
+/**
+ * Counts the right colors in the right place and the right colors and sends the data to the statistics
+ *
+ * @param player the player
+ * @return 0 if the guess is not fully correct and 1 if the guess is fully correct
+ */
 static int evaluateGuess(int player);
 
 /**
- * Entry point for the multiplayer
+ * Entry point for the Multiplayer
  */
 void PlayMultiplayer();
 
