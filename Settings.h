@@ -8,17 +8,17 @@
 /**
  * Stores the names for the two players
  */
-static char playerName[2] = {'O', 'T'};
+extern char playerName[2];
 
 /**
  * Stores the max number of tries
  */
-static unsigned int maxTries = 5;
+extern unsigned int maxTries;
 
 /**
  * Stores the max number of games in a single session
  */
-static unsigned int maxSessionGames = 5;
+extern unsigned int maxSessionGames;
 
 /**
  * Prints the settings menu

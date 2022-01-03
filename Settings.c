@@ -5,10 +5,25 @@
 #include "Settings.h"
 #include <stdio.h>
 #include "helpers.h"
+#include "constants.h"
+
+/**
+ * Stores the names for the two players
+ */
+char playerName[2] = {'O', 'T'};
+
+/**
+ * Stores the max number of tries
+ */
+unsigned int maxTries = 5;
+
+/**
+ * Stores the max number of games in a single session
+ */
+unsigned int maxSessionGames = 5;
 
 void printSettingsMenu() {
-    clear();
-    printf("\n");
+    printf("%s\n", TERMINAL_COLOR_DEFAULT);
     printf("+---+--------------------------+ \n");
     printf("|           Settings           | \n");
     printf("+---+--------------------------+ \n");
@@ -32,10 +47,12 @@ int pickFromSettingsMenu() {
     scanf("%i", &settingsMenuPick);
 
     if (settingsMenuPick < 0 || settingsMenuPick > 4) {
-        printf("\nInvalid option. \n");
+        printf("%s\nInvalid option. \n", TERMINAL_COLOR_RED);
 
         settingsMenuPick = pickFromSettingsMenu();
     }
+
+    clear();
 
     return settingsMenuPick;
 }
@@ -51,14 +68,14 @@ int isPlayerNameValid(char inputName) {
 char readPlayerName(int playerNumber) {
     char nameInput;
 
-    if (playerNumber == 1) printf("Insert a name for the player one. \n");
+    if (playerNumber == 1) printf("%sInsert a name for the player one. \n", TERMINAL_COLOR_DEFAULT);
 
-    if (playerNumber == 2) printf("Insert a name for the player one. \n");
+    if (playerNumber == 2) printf("%sInsert a name for the player two. \n", TERMINAL_COLOR_DEFAULT);
 
     scanf(" %c", &nameInput);
 
     if (isPlayerNameValid(nameInput) == 0) {
-        printf("Invalid Name. \n");
+        printf("%sInvalid Name. \n\n", TERMINAL_COLOR_RED);
 
         nameInput = readPlayerName(playerNumber);
     }
@@ -73,7 +90,9 @@ void setMaxTries() {
 
     scanf("%i", &maxTries);
 
-    printf("You now have %i tries per game.", maxTries);
+    clear();
+
+    printf("%sYou now have %i tries per game. \n", TERMINAL_COLOR_YELLOW, maxTries);
 }
 
 void setMaxSessionGames() {
@@ -81,11 +100,15 @@ void setMaxSessionGames() {
 
     scanf("%i", &maxSessionGames);
 
-    printf("You now have %i games per session.", maxSessionGames);
+    clear();
+
+    printf("%sYou now have %i games per session.\n", TERMINAL_COLOR_YELLOW, maxSessionGames);
 }
 
 void Settings() {
     int settingMenuInput;
+
+    clear();
 
     do {
         printSettingsMenu();
@@ -94,14 +117,24 @@ void Settings() {
 
         switch (settingMenuInput) {
             case 1:
+                clear();
+
                 playerName[0] = readPlayerName(1);
-                printf("The name of the player one is now %c.", playerName[0]);
+
+                clear();
+
+                printf("%sThe name of the player one is now %c.\n", TERMINAL_COLOR_YELLOW, playerName[0]);
 
                 break;
 
             case 2:
+                clear();
+
                 playerName[1] = readPlayerName(2);
-                printf("The name of the player two is now %c.", playerName[1]);
+
+                clear();
+
+                printf("%sThe name of the player two is now %c. \n", TERMINAL_COLOR_YELLOW, playerName[1]);
 
                 break;
 
