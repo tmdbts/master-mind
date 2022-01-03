@@ -8,9 +8,10 @@
 #include "SinglePlayer.h"
 #include "Multiplayer.h"
 #include "Statistics.h"
+#include "constants.h"
 
 void printMainMenu() {
-    printf("\n");
+    printf("%s\n", TERMINAL_COLOR_DEFAULT);
     printf("+---+---------------+ \n");
     printf("|     Main Menu     | \n");
     printf("+---+---------------+ \n");
